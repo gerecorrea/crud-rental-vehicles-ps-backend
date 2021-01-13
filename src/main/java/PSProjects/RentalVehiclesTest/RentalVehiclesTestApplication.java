@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class RentalVehiclesTestApplication extends SpringBootServletInitializer {
 
 	@RequestMapping("/")
-    public String home(){
-        return "Hello Everybody";
-    }
+	public String home() {
+		return "Hello Everybody";
+	}
 
 	@GetMapping("/hello")
 	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
 		return String.format("Olaa %s!", name);
 	}
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(RentalVehiclesTestApplication.class, args);
 	}
