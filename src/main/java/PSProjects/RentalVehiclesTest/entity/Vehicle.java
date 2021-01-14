@@ -17,7 +17,8 @@ public class Vehicle {
 	// Caso no banco estivesse um nome (por exemplo, "nome") e aqui outro, eu posso
 	// mapear:
 	// @Column(name = "nome")
-
+	// 
+	
 	private String name;
 	private String description;
 	private String brand;
