@@ -11,7 +11,7 @@ public class IndexController implements ErrorController{
 
     @RequestMapping(value = PATH)
     public String error() {
-        return "Please, specify a path.";
+        return "Please, specify a valid path.";
     }
 
     @Override
