@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import PSProjects.RentalVehiclesTest.repository.Vehicle;
+import PSProjects.RentalVehiclesTest.entity.Vehicle;
 
 @RestController
 public class VehicleController {

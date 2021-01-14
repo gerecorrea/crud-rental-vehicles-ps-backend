@@ -1,4 +1,4 @@
-package PSProjects.RentalVehiclesTest.repository;
+package PSProjects.RentalVehiclesTest.entity;
 
 public class Vehicle {
 	private int id;
@@ -88,3 +88,4 @@ public class Vehicle {
 	}
 	
 }
+
