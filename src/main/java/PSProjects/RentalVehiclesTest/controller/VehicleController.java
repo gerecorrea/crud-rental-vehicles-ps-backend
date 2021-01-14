@@ -51,13 +51,13 @@ public class VehicleController {
 		v3.setId(3);
 		v3.setName("Corsa");
 		v3.setBrand("Chevrolet");
-		v2.setDescription("Motor 1.0, baixoconsumo, baixo conforto, sem estilo.");
-		v2.setYear(2003);
-		v2.setLicense_plate("MHG0003");
-		v2.setColor("Azul");
-		v2.setFipe(6500);
-		v2.setInsurance(1300);
-		v2.setPhoto("randomlink");
+		v3.setDescription("Motor 1.0, baixoconsumo, baixo conforto, sem estilo.");
+		v3.setYear(2003);
+		v3.setLicense_plate("MHG0003");
+		v3.setColor("Azul");
+		v3.setFipe(6500);
+		v3.setInsurance(1300);
+		v3.setPhoto("randomlink");
 		
 		return Arrays.asList(v1, v2, v3);
 	}
