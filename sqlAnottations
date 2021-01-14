@@ -1,0 +1,23 @@
+Flyway dependency (se precisar, no momento retirei):
+<dependency>
+	<groupId>org.flywaydb</groupId>
+	<artifactId>flyway-core</artifactId>
+</dependency>
+
+CREATE TABLE vehicle(
+	id int primary key,
+	name varchar(50),
+	description varchar(50),
+	brand varchar(50),
+	year int,
+	license_plate varchar(50),
+	type varchar(50),
+	color varchar(50),
+	fipe float,
+	insurance float,
+	photo varchar(100),
+	quantity int
+);
+
+INSERT INTO Vehicle VALUES (1, 'Maverick', 'Motor 3.2', 'Ford', 1973, 'MHG0001', 'Carro','Amarelo', 45000, 2800, 'randomlink', 3),
+		(2, 'Edge', 'Motor 1.8', 'Ford', 2013, 'MHG003', 'Carro','Prata', 32000, 1900, 'randomlink', 2);
