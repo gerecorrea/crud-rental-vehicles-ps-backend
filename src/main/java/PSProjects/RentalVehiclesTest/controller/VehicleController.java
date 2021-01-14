@@ -1,4 +1,4 @@
-package controller;
+package PSProjects.RentalVehiclesTest.controller;
 
 import java.util.Arrays;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import repository.Vehicle;
+import PSProjects.RentalVehiclesTest.repository.Vehicle;
 
 @RestController
 public class VehicleController {
@@ -37,3 +37,4 @@ public class VehicleController {
 	}
 
 }
+

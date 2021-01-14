@@ -1,4 +1,4 @@
-package repository;
+package PSProjects.RentalVehiclesTest.repository;
 
 public class Vehicle {
 	private int id;
