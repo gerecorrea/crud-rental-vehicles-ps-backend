@@ -22,10 +22,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import PSProjects.RentalVehiclesTest.entity.Vehicle;
 import PSProjects.RentalVehiclesTest.repository.VehicleRepository;
+import PSProjects.RentalVehiclesTest.service.BusinessRules;
 
 @RestController
 @RequestMapping("/vehicles") // Assim padroniza os acessos internos na url.
 public class VehicleController {
+	// Aqui é o controlador, chamamos o service (regra de negócio) como
+	// intermediário quando queremos fazer alguma requisição no banco.
+
+	@Autowired
+	private BusinessRules businessRules;
 
 	@Autowired
 	private VehicleRepository vehicleRepository;
@@ -42,30 +48,26 @@ public class VehicleController {
 
 	@GetMapping("") // Ou apenas: @GetMapping
 	public List<Vehicle> listAll() {
-		// Função que, ao ter instanciando um VehicleRepostory advindo de sua interface,
-		// usa o método findAll() para retornar uma lista contendo todos os dados lá
-		// contidos. FUNÇÃO DE USO MAIS VÁLIDO PARA BUSCA DOS DADOS.
-		return vehicleRepository.findAll();
+		// Função para listagem de todos os dados
+
+		return businessRules.listAll();
 	}
 
 	@GetMapping("/{vehicleId}")
 	public ResponseEntity<Vehicle> listById(@PathVariable UUID vehicleId) {
 		// Busca um veículo pelo ID em /vehicles/id:
-		// Com o {var}, lê o dado da url informada
-		// Uso do ResponseEntity para retornar 404, caso o Id não exista.
+		// Com o {var}, lê o dado da url informada e pega pelo @PathVariable
 
-		Optional<Vehicle> vehicle = vehicleRepository.findById(vehicleId);
+		// ResponseEntity é um tipo que retorna a resposta retornada da requisição.
+		// Bom para manipular melhor a resposta a ser dada.
+
+		Optional<Vehicle> vehicle = businessRules.findById(vehicleId);
 
 		if (vehicle.isPresent()) {
-			// ResponseEntity é um tipo que retorna a resposta retornada da requisição.
-			// Bom para manipular melhor a resposta a ser dada.
-			return ResponseEntity.ok(vehicle.get());
+			return ResponseEntity.ok(vehicle.get()); // Retorna o objeto com 200
 		}
 
-		// Retorna o cliente, se não tiver, retorna null:
-		// return vehicle.orElse(null);
-
-		return ResponseEntity.notFound().build();
+		return ResponseEntity.notFound().build(); // Não achou, retorna 404
 	}
 
 	@PostMapping
@@ -76,39 +78,22 @@ public class VehicleController {
 		// Com @RequestBody faz com que o corpo da requisição seja transformada no
 		// objeto Vehicle para utilizarmos no Java
 
-		// Salva veículo no BD, através da função built-in do JPA no repository
-		return vehicleRepository.save(vehicle);
+		return businessRules.create(vehicle);
 	}
 
 	@PutMapping("/{vehicleId}")
 	public ResponseEntity<Vehicle> update(@PathVariable UUID vehicleId, @RequestBody Vehicle vehicle) {
-		// @Pathvariable para pegar como var parte do caminho, assim como @RequestBody
-		// para pegar o corpo da requisição e lançar para o objeto Veículo
+		// Lanço para o update do service, ele efetuar tudo.
 
-		if (!vehicleRepository.existsById(vehicleId)) {
-			// Caso Id do veículo não exista:
-			return ResponseEntity.notFound().build();
-		}
-
-		vehicle.setId(vehicleId);
-		vehicle = vehicleRepository.save(vehicle);
-		return ResponseEntity.ok(vehicle); // Retorna 200 (OK)
+		return businessRules.updateById(vehicleId, vehicle);
 	}
 
 	@DeleteMapping("/{vehicleId}")
-	public ResponseEntity<Void> Delete(@PathVariable UUID vehicleId) {
-		
-		if (!vehicleRepository.existsById(vehicleId)) {
-			// Se não existe, retorna 404
-			return ResponseEntity.notFound().build();
-		}
-
-		vehicleRepository.deleteById(vehicleId);
-
-		return ResponseEntity.noContent().build(); // Retorna 204
+	public ResponseEntity<Void> deleteById(@PathVariable UUID vehicleId) {
+		return businessRules.deleteById(vehicleId);
 	}
 
-	// ABAIXO DAQUI SÃO MÉTODO ANTIGOS (POR SER UM PROJETO DE TESTE):
+	// ABAIXO DAQUI SÃO MÉTODO ANTIGOS (POR SER UM PROJETO DE TESTE MANTIVE) :
 
 	@GetMapping("/search-by-slice-name")
 	public List<Vehicle> searchBySliceName(String search) {
