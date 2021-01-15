@@ -46,7 +46,7 @@ public class VehicleController {
 	 * é @PostMapping("url"), etc
 	 */
 
-	@GetMapping("") // Ou apenas: @GetMapping
+	@GetMapping // Ou: @GetMapping("")
 	public List<Vehicle> listAll() {
 		// Função para listagem de todos os dados
 

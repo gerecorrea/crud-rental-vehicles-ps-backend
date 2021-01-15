@@ -64,5 +64,18 @@ CAso queira enviar pelo body do request:
     "insurance": 1900.0,
     "photo": "randomlink",
     "quantity": 2
+  },
+  {
+    "name": "Polo",
+    "description": "Motor 1.6, confortline, confortável",
+    "brand": "Volkswagen",
+    "year": 2008,
+    "license_plate": "BAR2234",
+    "type": "Carro",
+    "color": "Preto",
+    "fipe": 23000.0,
+    "insurance": 1400.0,
+    "photo": "randomlink2",
+    "quantity": 1
   }
 ]
