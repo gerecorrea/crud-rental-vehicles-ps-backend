@@ -1,9 +1,14 @@
 package PSProjects.RentalVehiclesTest.entity;
 
+import java.util.UUID;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import com.sun.istack.NotNull;
 
 @Entity
 public class Vehicle {
@@ -11,13 +16,15 @@ public class Vehicle {
 	// Algumas annotations do javax.persistence
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	//@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(generator = "system-uuid", strategy = GenerationType.AUTO) // Usando UUID, por ex, indicado.
+	@Column(columnDefinition = "uuid", nullable = false) //Podendo setar 
+	@NotNull
+	private UUID id;
 
 	// Caso no banco estivesse um nome (por exemplo, "nome") e aqui outro, eu posso
 	// mapear:
 	// @Column(name = "nome")
-	// 
 	
 	private String name;
 	private String description;
@@ -31,11 +38,11 @@ public class Vehicle {
 	private String photo;
 	private Long quantity;
 
-	public Long getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
@@ -129,26 +136,26 @@ public class Vehicle {
 
 	// Abaixo hash code (shift alt s) gerado a partir do ID da classe:
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = (int) (prime * result + id);
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Vehicle other = (Vehicle) obj;
-		if (id != other.id)
-			return false;
-		return true;
-	}
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = 1;
+//		result = (int) (prime * result + id);
+//		return result;
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		Vehicle other = (Vehicle) obj;
+//		if (id != other.id)
+//			return false;
+//		return true;
+//	}
 
 }

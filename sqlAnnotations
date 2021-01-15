@@ -4,6 +4,8 @@ Flyway dependency (se precisar, no momento retirei):
 	<artifactId>flyway-core</artifactId>
 </dependency>
 
+// usando UUID para criação dos IDs, na tabela ele não vai e na adição gero um id pelo site e adiciono ao fim da mesma
+
 CREATE TABLE vehicle(
 	id int primary key,
 	name varchar(50),
@@ -19,5 +21,48 @@ CREATE TABLE vehicle(
 	quantity int
 );
 
-INSERT INTO Vehicle VALUES (1, 'Maverick', 'Motor 3.2', 'Ford', 1973, 'MHG0001', 'Carro','Amarelo', 45000, 2800, 'randomlink', 3),
-		(2, 'Edge', 'Motor 1.8', 'Ford', 2013, 'MHG003', 'Carro','Prata', 32000, 1900, 'randomlink', 2);
+INSERT INTO Vehicle VALUES ('Maverick', 'Motor 3.2', 'Ford', 1973, 'MHG0001', 'Carro','Amarelo', 45000, 2800, 'randomlink', 3, INSERT INTO Vehicle VALUES ('Maverick', 'Motor 3.4', 'Ford', 1973, 'MHG0001', 'Carro','Amarelo', 45000, 2800, 'randomlink', 3, '147c075a-5742-11eb-ae93-0242ac130002')),
+		('Edge', 'Motor 1.8', 'Ford', 2013, 'MHG003', 'Carro','Prata', 32000, 1900, 'randomlink', 2, '61258cde-5742-11eb-ae93-0242ac130002');
+		
+CAso queira enviar pelo body do request:
+[
+  {
+    "name": "Polo",
+    "description": "Motor 1.6, confortline",
+    "brand": "Volkswagen",
+    "year": 2008,
+    "license_plate": "BAR0001",
+    "type": "Carro",
+    "color": "Preto",
+    "fipe": 23000.0,
+    "insurance": 1400.0,
+    "photo": "randomlink2",
+    "quantity": 1
+  },
+  {
+    "name": "Maverick",
+    "description": "Motor 3.4",
+    "brand": "Ford",
+    "year": 1973,
+    "license_plate": "MHG0001",
+    "type": "Carro",
+    "color": "Amarelo",
+    "fipe": 45000.0,
+    "insurance": 2800.0,
+    "photo": "randomlink",
+    "quantity": 3
+  },
+  {
+    "name": "Edge",
+    "description": "Motor 1.8",
+    "brand": "Ford",
+    "year": 2013,
+    "license_plate": "MHG003",
+    "type": "Carro",
+    "color": "Prata",
+    "fipe": 32000.0,
+    "insurance": 1900.0,
+    "photo": "randomlink",
+    "quantity": 2
+  }
+]
