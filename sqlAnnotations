@@ -7,7 +7,6 @@ Flyway dependency (se precisar, no momento retirei):
 // usando UUID para criação dos IDs, na tabela ele não vai e na adição gero um id pelo site e adiciono ao fim da mesma
 
 CREATE TABLE vehicle(
-	id int primary key,
 	name varchar(50),
 	description varchar(50),
 	brand varchar(50),

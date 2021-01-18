@@ -12,7 +12,7 @@ import PSProjects.RentalVehiclesTest.entity.Vehicle;
 import PSProjects.RentalVehiclesTest.repository.VehicleRepository;
 
 @Service
-public class BusinessRules {
+public class VehicleService {
 
 	@Autowired
 	private VehicleRepository vehicleRepository;
@@ -30,28 +30,31 @@ public class BusinessRules {
 		return vehicleRepository.save(vehicle);
 	}
 	
-	public ResponseEntity<Vehicle> updateById(UUID vehicleId, Vehicle vehicle){
+	public Vehicle updateById(UUID vehicleId, Vehicle vehicle){
 		//return vehicleRepository.existsById(vehicleId);
 		
 		if (!vehicleRepository.existsById(vehicleId)) {
 			// Caso Id do veículo não exista:
-			return ResponseEntity.notFound().build();
+			//return ResponseEntity.notFound().build();
+			return null;
 		}
 
 		vehicle.setId(vehicleId);
 		vehicle = vehicleRepository.save(vehicle);
-		return ResponseEntity.ok(vehicle); // Retorna 200 (OK)
+		return vehicle;
+		//return ResponseEntity.ok(vehicle); // Retorna 200 (OK)
 	}
 	
-	public ResponseEntity<Void> deleteById(UUID vehicleId) {
+	public Void deleteById(UUID vehicleId) {
 
 		if (!vehicleRepository.existsById(vehicleId)) {
 			// Se não existe, retorna 404
-			return ResponseEntity.notFound().build();
+			//return ResponseEntity.notFound().build();
+			return null;
 		}
-
+		
 		vehicleRepository.deleteById(vehicleId);
-
-		return ResponseEntity.noContent().build(); // Retorna 204, sucesso.
+		return null;
+		//return ResponseEntity.noContent().build(); // Retorna 204, sucesso.
 	}
 }

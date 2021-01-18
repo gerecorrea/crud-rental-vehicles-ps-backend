@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import PSProjects.RentalVehiclesTest.entity.Vehicle;
 import PSProjects.RentalVehiclesTest.repository.VehicleRepository;
-import PSProjects.RentalVehiclesTest.service.BusinessRules;
+import PSProjects.RentalVehiclesTest.service.VehicleService;
 
 @RestController
 @RequestMapping("/vehicles") // Assim padroniza os acessos internos na url.
@@ -31,7 +31,7 @@ public class VehicleController {
 	// intermediário quando queremos fazer alguma requisição no banco.
 
 	@Autowired
-	private BusinessRules businessRules;
+	private VehicleService vehicleService;
 
 	@Autowired
 	private VehicleRepository vehicleRepository;
@@ -50,24 +50,24 @@ public class VehicleController {
 	public List<Vehicle> listAll() {
 		// Função para listagem de todos os dados
 
-		return businessRules.listAll();
+		return vehicleService.listAll();
 	}
 
 	@GetMapping("/{vehicleId}")
-	public ResponseEntity<Vehicle> listById(@PathVariable UUID vehicleId) {
+	public Vehicle listById(@PathVariable UUID vehicleId) {
 		// Busca um veículo pelo ID em /vehicles/id:
 		// Com o {var}, lê o dado da url informada e pega pelo @PathVariable
 
 		// ResponseEntity é um tipo que retorna a resposta retornada da requisição.
 		// Bom para manipular melhor a resposta a ser dada.
 
-		Optional<Vehicle> vehicle = businessRules.findById(vehicleId);
-
-		if (vehicle.isPresent()) {
-			return ResponseEntity.ok(vehicle.get()); // Retorna o objeto com 200
-		}
-
-		return ResponseEntity.notFound().build(); // Não achou, retorna 404
+		Optional<Vehicle> vehicle = vehicleService.findById(vehicleId);
+		return vehicleService.findById(vehicleId).orElse(null);
+		
+		//if (vehicle.isPresent()) 
+			//return ResponseEntity.ok(vehicle.get()); // Retorna o objeto com 200
+		//}
+		//return ResponseEntity.notFound().build(); // Não achou, retorna 404
 	}
 
 	@PostMapping
@@ -78,19 +78,19 @@ public class VehicleController {
 		// Com @RequestBody faz com que o corpo da requisição seja transformada no
 		// objeto Vehicle para utilizarmos no Java
 
-		return businessRules.create(vehicle);
+		return vehicleService.create(vehicle);
 	}
 
 	@PutMapping("/{vehicleId}")
-	public ResponseEntity<Vehicle> update(@PathVariable UUID vehicleId, @RequestBody Vehicle vehicle) {
+	public Vehicle update(@PathVariable UUID vehicleId, @RequestBody Vehicle vehicle) {
 		// Lanço para o update do service, ele efetuar tudo.
 
-		return businessRules.updateById(vehicleId, vehicle);
+		return vehicleService.updateById(vehicleId, vehicle);
 	}
 
 	@DeleteMapping("/{vehicleId}")
-	public ResponseEntity<Void> deleteById(@PathVariable UUID vehicleId) {
-		return businessRules.deleteById(vehicleId);
+	public Void deleteById(@PathVariable UUID vehicleId) {
+		return vehicleService.deleteById(vehicleId);
 	}
 
 	// ABAIXO DAQUI SÃO MÉTODO ANTIGOS (POR SER UM PROJETO DE TESTE MANTIVE) :
