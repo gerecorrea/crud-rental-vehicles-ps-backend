@@ -1,7 +1,6 @@
 package PSProjects.RentalVehiclesTest.controller;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import javax.persistence.EntityManager;
@@ -9,7 +8,6 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,6 +43,8 @@ public class VehicleController {
 	 * GetMapping o mapeamento da url desta requisição. Quanto é de post, então
 	 * é @PostMapping("url"), etc
 	 */
+	
+	
 
 	@GetMapping // Ou: @GetMapping("")
 	public List<Vehicle> listAll() {
@@ -61,7 +61,6 @@ public class VehicleController {
 		// ResponseEntity é um tipo que retorna a resposta retornada da requisição.
 		// Bom para manipular melhor a resposta a ser dada.
 
-		Optional<Vehicle> vehicle = vehicleService.findById(vehicleId);
 		return vehicleService.findById(vehicleId).orElse(null);
 		
 		//if (vehicle.isPresent()) 
