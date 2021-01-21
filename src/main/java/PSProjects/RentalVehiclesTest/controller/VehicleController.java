@@ -43,8 +43,6 @@ public class VehicleController {
 	 * GetMapping o mapeamento da url desta requisição. Quanto é de post, então
 	 * é @PostMapping("url"), etc
 	 */
-	
-	
 
 	@GetMapping // Ou: @GetMapping("")
 	public List<Vehicle> listAll() {
@@ -62,11 +60,11 @@ public class VehicleController {
 		// Bom para manipular melhor a resposta a ser dada.
 
 		return vehicleService.findById(vehicleId).orElse(null);
-		
-		//if (vehicle.isPresent()) 
-			//return ResponseEntity.ok(vehicle.get()); // Retorna o objeto com 200
-		//}
-		//return ResponseEntity.notFound().build(); // Não achou, retorna 404
+
+		// if (vehicle.isPresent())
+		// return ResponseEntity.ok(vehicle.get()); // Retorna o objeto com 200
+		// }
+		// return ResponseEntity.notFound().build(); // Não achou, retorna 404
 	}
 
 	@PostMapping
@@ -81,12 +79,13 @@ public class VehicleController {
 	}
 
 	@PutMapping("/{vehicleId}")
-	public Vehicle update(@PathVariable UUID vehicleId, @RequestBody Vehicle vehicle) {
-		// Lanço para o update do service, ele efetuar tudo.
-
+	public Vehicle updateById(@PathVariable UUID vehicleId, @RequestBody Vehicle vehicle) {
+		// Lanço para o update do service, ele efetua tudo.
 		return vehicleService.updateById(vehicleId, vehicle);
 	}
 
+	// @CrossOrigin(origins = "http://localhost:8080") //Teste pois estava dando
+	// status 405
 	@DeleteMapping("/{vehicleId}")
 	public Void deleteById(@PathVariable UUID vehicleId) {
 		return vehicleService.deleteById(vehicleId);

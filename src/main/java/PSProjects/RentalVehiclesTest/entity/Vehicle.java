@@ -16,16 +16,16 @@ public class Vehicle {
 	// Algumas annotations do javax.persistence
 
 	@Id
-	//@GeneratedValue(strategy = GenerationType.AUTO)
+	// @GeneratedValue(strategy = GenerationType.AUTO)
 	@GeneratedValue(generator = "system-uuid", strategy = GenerationType.AUTO) // Usando UUID, por ex, indicado.
-	@Column(columnDefinition = "uuid", nullable = false) //Podendo setar 
+	@Column(columnDefinition = "uuid", nullable = false) // Podendo setar
 	@NotNull
 	private UUID id;
 
 	// Caso no banco estivesse um nome (por exemplo, "nome") e aqui outro, eu posso
 	// mapear:
 	// @Column(name = "nome")
-	
+
 	private String name;
 	private String description;
 	private String brand;
