@@ -13,12 +13,11 @@ import com.sun.istack.NotNull;
 @Entity
 public class Vehicle {
 
-	// Algumas annotations do javax.persistence
+	// Algumas annotations do javax.persistence:
 
 	@Id
-	// @GeneratedValue(strategy = GenerationType.AUTO)
-	@GeneratedValue(generator = "system-uuid", strategy = GenerationType.AUTO) // Usando UUID, por ex, indicado.
-	@Column(columnDefinition = "uuid", nullable = false) // Podendo setar
+	@GeneratedValue(generator = "system-uuid", strategy = GenerationType.AUTO) // Usando UUID
+	@Column(columnDefinition = "uuid", nullable = false)
 	@NotNull
 	private UUID id;
 

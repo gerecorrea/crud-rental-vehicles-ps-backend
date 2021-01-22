@@ -10,11 +10,11 @@ import PSProjects.RentalVehiclesTest.entity.Vehicle;
 
 @Repository
 public interface VehicleRepository extends JpaRepository<Vehicle, UUID> {
-	// O "Long" é o tipo da variável de identificação/primária utilizado
-	// Como int não aceita (mesmo quando era tudo int, o que foi modificado)
+	// O "Long" é o tipo da variável de identificação/primária padrão
+	// Aqui foi utilizado o UUID, para geração automática do Id dos veículos
 
 	// Criando métodos para uso na instanciação do VehicleRepository:
-	// OBS: O JPA implementa isso pra gente (como?), apenas passamos as variáveis
+	// OBS: O JPA implementa isso pra gente em boa parte
 
 	// Método que busca um veículo pelo seu nome completo:
 	List<Vehicle> findByName(String name);

@@ -31,7 +31,6 @@ public class VehicleService {
 	
 	public Vehicle updateById(UUID vehicleId, Vehicle vehicle){
 		//return vehicleRepository.existsById(vehicleId);
-		
 		if (!vehicleRepository.existsById(vehicleId)) {
 			// Caso Id do veículo não exista:
 			//return ResponseEntity.notFound().build();
@@ -47,7 +46,7 @@ public class VehicleService {
 	public Void deleteById(UUID vehicleId) {
 
 		if (!vehicleRepository.existsById(vehicleId)) {
-			// Se não existe, retorna 404
+			// Se não existe, retorna 404:
 			//return ResponseEntity.notFound().build();
 			return null;
 		}

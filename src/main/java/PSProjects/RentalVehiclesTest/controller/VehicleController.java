@@ -3,9 +3,6 @@ package PSProjects.RentalVehiclesTest.controller;
 import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,11 +16,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import PSProjects.RentalVehiclesTest.entity.Vehicle;
-import PSProjects.RentalVehiclesTest.repository.VehicleRepository;
 import PSProjects.RentalVehiclesTest.service.VehicleService;
 
 @RestController
-@RequestMapping("/vehicles") // Assim padroniza os acessos internos na url.
+@RequestMapping("/vehicles") // Assim padroniza os acessos internos na url para todos da classe
 public class VehicleController {
 	// Aqui é o controlador, chamamos o service (regra de negócio) como
 	// intermediário quando queremos fazer alguma requisição no banco.
@@ -31,23 +27,18 @@ public class VehicleController {
 	@Autowired
 	private VehicleService vehicleService;
 
-	@Autowired
-	private VehicleRepository vehicleRepository;
-	// Acima eu busco uma instância de VehicleRepository
-
 	/*
 	 * Para conseguir acesso via url aqui - localhost:8080/vehicles: Foi adicionado
 	 * o @GetMapping com o endpoint da url, assim como o @RestController
 	 * 
-	 * @RestController é adicionado sempre que deseja realizar requisições, O
-	 * GetMapping o mapeamento da url desta requisição. Quanto é de post, então
-	 * é @PostMapping("url"), etc
+	 * @RestController é adicionado sempre que se deseja realizar requisições O
+	 * GetMapping é o mapeamento da url desta requisição para casos get. Quando é de
+	 * post, então é @PostMapping("url"), etc
 	 */
 
 	@GetMapping // Ou: @GetMapping("")
 	public List<Vehicle> listAll() {
-		// Função para listagem de todos os dados
-
+		// Função para listagem de todos os dados:
 		return vehicleService.listAll();
 	}
 
@@ -55,10 +46,6 @@ public class VehicleController {
 	public Vehicle listById(@PathVariable UUID vehicleId) {
 		// Busca um veículo pelo ID em /vehicles/id:
 		// Com o {var}, lê o dado da url informada e pega pelo @PathVariable
-
-		// ResponseEntity é um tipo que retorna a resposta retornada da requisição.
-		// Bom para manipular melhor a resposta a ser dada.
-
 		return vehicleService.findById(vehicleId).orElse(null);
 
 		// if (vehicle.isPresent())
@@ -71,49 +58,46 @@ public class VehicleController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public Vehicle create(@RequestBody Vehicle vehicle) {
 		// Função para cadastro de veículo, repare que usa anotação @PostMapping
-
 		// Com @RequestBody faz com que o corpo da requisição seja transformada no
 		// objeto Vehicle para utilizarmos no Java
-
 		return vehicleService.create(vehicle);
 	}
 
 	@PutMapping("/{vehicleId}")
 	public Vehicle updateById(@PathVariable UUID vehicleId, @RequestBody Vehicle vehicle) {
-		// Lanço para o update do service, ele efetua tudo.
+		// Função para atualização do cadastro do veículo:
 		return vehicleService.updateById(vehicleId, vehicle);
 	}
 
-	// @CrossOrigin(origins = "http://localhost:8080") //Teste pois estava dando
-	// status 405
 	@DeleteMapping("/{vehicleId}")
 	public Void deleteById(@PathVariable UUID vehicleId) {
+		// Função para exclusão do veículo
 		return vehicleService.deleteById(vehicleId);
 	}
 
-	// ABAIXO DAQUI SÃO MÉTODO ANTIGOS (POR SER UM PROJETO DE TESTE MANTIVE) :
+	// ABAIXO DAQUI SÃO MÉTODO ANTIGOS (POR SER UM PROJETO DE TESTE MANTIVE):
 
-	@GetMapping("/search-by-slice-name")
-	public List<Vehicle> searchBySliceName(String search) {
-		// Função que usa método implementando na interface;
-		return vehicleRepository.findByNameContaining("e");
-	}
-
-	@GetMapping("/search-by-name")
-	public List<Vehicle> searchByName(String search) {
-		// Função que usa método implementando na interface;
-		return vehicleRepository.findByName("Edge");
-	}
-
-	@PersistenceContext
-	private EntityManager manager;
-
-	@GetMapping("/list-all-basic-bd")
-	public List<Vehicle> listAllBasicBD() {
-		// Aqui uma consulta de LISTAGEM com estilo do jpa hibernate, com ligação com o
-		// Postgres:
-		return manager.createQuery("from Vehicle", Vehicle.class).getResultList();
-	}
+//	@GetMapping("/search-by-slice-name")
+//	public List<Vehicle> searchBySliceName(String search) {
+//		// Função que usa método implementando na interface;
+//		return vehicleRepository.findByNameContaining("e");
+//	}
+//
+//	@GetMapping("/search-by-name")
+//	public List<Vehicle> searchByName(String search) {
+//		// Função que usa método implementando na interface;
+//		return vehicleRepository.findByName("Edge");
+//	}
+//
+//	@PersistenceContext
+//	private EntityManager manager;
+//
+//	@GetMapping("/list-all-basic-bd")
+//	public List<Vehicle> listAllBasicBD() {
+//		// Aqui uma consulta de LISTAGEM com estilo do jpa hibernate, com ligação com o
+//		// Postgres:
+//		return manager.createQuery("from Vehicle", Vehicle.class).getResultList();
+//	}
 
 //	@GetMapping("/list-all-old")
 //	public List<Vehicle> listAllOld() {

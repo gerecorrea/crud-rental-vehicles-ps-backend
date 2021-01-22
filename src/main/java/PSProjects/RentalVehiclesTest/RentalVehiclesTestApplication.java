@@ -10,7 +10,8 @@ import org.springframework.stereotype.Controller;
 public class RentalVehiclesTestApplication extends SpringBootServletInitializer {
 	// ATENÇÃO: esse código está comentado para clareza para o autor do que e como
 	// ser feito.
-	// Na prática, não devem ser realizados comentários, assim como nenhum código
+	// Na prática, não devem ser realizados comentários (com restritivas exceções),
+	// assim como nenhum código
 	// deve estar comentado.
 
 	public static void main(String[] args) {
